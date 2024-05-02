@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Script that prints "bad luck" 4th line, "good luck" on the 8th line, and "Best School" for remaining lines
+n=1
+
+while [ $n -le 10 ]
+do
+    if [ $n -eq 4 ]
+    then
+        echo "bad luck"
+    elif [ $n -eq 8 ]
+    then
+        echo "good luck"
+    else
+        echo "Best School"
+    fi
+    n=$(( n + 1 ))
+done
