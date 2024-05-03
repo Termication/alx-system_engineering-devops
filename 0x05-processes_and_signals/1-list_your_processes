@@ -3,4 +3,4 @@
 # This script shows all processes, including those for all users
 # and those that might not have a TTY.
 
-ps -a uf
+ps auxf
