@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Description: Terminate the process named '7-highlander'.
+# Requirement: Use the `kill` command with signal 9 (-9).
+
+kill -9 "$(pgrep -f highlander)"
