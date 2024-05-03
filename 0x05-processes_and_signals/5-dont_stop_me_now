@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Description: Stop the process named '4-to_infinity_and_beyond'.
+# Requirement: Utilize the `kill` command.
+
+kill "$(pgrep -f 4-to_infinity_and_beyond)"
