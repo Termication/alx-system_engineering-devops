@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Description: Display 'To infinity and beyond' indefinitely with a 2-second pause between each iteration.
+# Requirement: Add a sleep 2 between each loop iteration.
+
+# Trap SIGTERM signal to display a message
+trap 'echo "I am invincible!!!"' SIGTERM
+
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
