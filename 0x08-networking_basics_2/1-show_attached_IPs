@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Description:
+#   This script displays all IPv4 addresses assigned to a machine.
+ifconfig -a | grep inet | cut -d: -f2 | cut -d" " -f1
