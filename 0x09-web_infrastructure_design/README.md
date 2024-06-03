@@ -110,7 +110,6 @@ sudo apt-get install apache2
         Open your web browser and navigate to your load balancer's IP address or domain name.
 
 ## Contributing
-
     Fork the repository.
     Create a new branch (git checkout -b feature-branch).
     Make your changes and commit them (git commit -m 'Add new feature').
