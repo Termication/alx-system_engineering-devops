@@ -14,25 +14,25 @@ Secure Shell (SSH) is a cryptographic network protocol used for secure communica
 
 Creating an SSH RSA key pair involves generating a pair of cryptographic keys: a private key (kept secure on your local machine) and a public key (shared with the remote server). Here are the steps to create an SSH RSA key pair:
 
-    **Open a terminal** on your local machine.
-    **Generate the key pair** by running the following command:
+    Open a terminal on your local machine.
+    Generate the key pair by running the following command:
 
-    ```bash
+    bash
 
     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-```
-    **Follow the prompts:**
+
+    Follow the prompts:
         Specify the file where the key should be saved (press Enter to accept the default location).
         Enter a passphrase (optional) for added security.
     Your key pair will be created and saved in the specified location, typically ~/.ssh/id_rsa (private key) and ~/.ssh/id_rsa.pub (public key).
 
-## How to Connect to a Remote Host Using an SSH RSA Key Pair
+How to Connect to a Remote Host Using an SSH RSA Key Pair
 
-### To connect to a remote host using your SSH RSA key pair, follow these steps:
+To connect to a remote host using your SSH RSA key pair, follow these steps:
 
     Copy your public key to the remote host:
 
-    ```bash
+```bash
 
 ssh-copy-id username@remote_host
 ```
