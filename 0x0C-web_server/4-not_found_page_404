@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Install Nginx web server
+apt-get -y install nginx
+
+# Allow Nginx to serve on HTTP through the firewall
+ufw allow 'Nginx HTTP'
+
+# Create a new index.html file and overwrite the default index.nginx-debian.html
+echo "Holberton School" > /var/www/html/index.html
+
+# Give the current user ownership of the website files and set appropriate permissions
+chown -R $USER:$USER /var/www/html
+chmod -R 755 /var/www
+
+# Add a permanent redirection from /redirect_me to a YouTube video
+sed -i '37i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
+# Create a custom 404 error page
+echo "Ceci n'est pas une page" > /var/www/html/error_404.html
+sed -i '38i\error_page 404 /error_404.html;' /etc/nginx/sites-available/default
+
+# Start the Nginx service
+service nginx start
