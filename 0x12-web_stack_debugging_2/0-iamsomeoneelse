@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# This script runs the whoami command as the user passed as an argument.
+
+# Usage: ./script_name.sh <username>
+# Example: ./script_name.sh john
+
+# Check if a username is provided as an argument
+if [ -z "$1" ]; then
+  echo "Error: No username provided."
+  echo "Usage: $0 <username>"
+  exit 1
+fi
+
+# Run the whoami command as the specified user
+sudo -u "$1" whoami
