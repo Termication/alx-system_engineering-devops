@@ -33,3 +33,43 @@ Task List:
  Conduct a thorough code audit focusing on resource management, including file handles, threads, and database connections.
  Implement automated tests that simulate heavy database usage and monitor connection pool behavior.
  Schedule a post-incident review meeting to discuss the incident and ensure all team members are aware of the root cause and resolution.
+
+
+
+Make people want to read your postmortem
+
+
+# Postmortem: The Great Database Pool Party of 2024
+
+## Issue Summary:
+Duration: August 15, 2024, 10:00 AM - 12:30 PM (UTC)
+Impact: During the outage, 60% of users were left tapping their fingers, waiting for pages to load, while 25% were outright kicked out of the party with "Service Unavailable" errors. Our beloved web app and API were the culprits, making users feel like they were trying to enter an exclusive club with no more room.
+Root Cause: Our database was the bouncer, and it got overwhelmed when connections were sneaking in but never leaving. A connection leak in the application caused the database pool to overflow, leaving new connections waiting outside.
+
+## Timeline:
+10:00 AM - Alert! The DJ stopped the music. Monitoring showed our servers having a breakdown, with response times going through the roof.
+10:05 AM - On-call engineer ran to the rescue, checking logs and database stats.
+10:15 AM - Assumed cause: "Must be too many party crashers after our new feature drop!" More servers were added to handle the crowd.
+10:20 AM - The extra servers helped a bit, but the dance floor was still overcrowded. The issue persisted.
+10:40 AM - Misstep: We blamed the new feature for bringing in rowdy guests, but it was innocent. Time to escalate!
+11:00 AM - The database team was called in to handle the gate. They noticed the connection pool was packed tighter than a can of sardines.
+11:20 AM - Aha! The true troublemaker was found: connections were entering the pool and never leaving, like guests refusing to go home.
+12:00 PM - The fix was in: code was added to kick out idle connections, letting new guests (connections) in.
+12:30 PM - The party resumed, and the system was back to grooving as usual.
+
+## Root Cause and Resolution:
+Root Cause: Our application had a "connection hoarder" problem. It was grabbing database connections but not letting them go after it was done with them. This led to a connection pool filled to the brim, and no new connections could get in, causing the system to slow down and eventually freeze up.
+Resolution: The fix was simple but crucial: we added a line of code to ensure that every connection left the pool after the app was done with it. Like a good host, the application now politely shows connections the door when their time is up.
+
+## Corrective and Preventative Measures:
+Lessons Learned:
+Always make sure your connections know when it's time to leave.
+Monitor your database pool like a good bouncer, know when it's getting too full.
+Test your system under high load to make sure it can handle the crowd.
+### To-Do List:
+ Deploy the connection fix across all servers.
+ Set up monitoring alerts for pool overcrowding.
+ Review all code that handles resources (connections, files, threads) to avoid similar leaks.
+ Load-test the system with simulated high traffic to catch issues before they become real.
+
+We hope this postmortem gave you a few smiles amidst the technical talk. The "Great Database Pool Party" of 2024 was a lesson in connection management, and by tightening up our guest list, we're ensuring smoother operations in the future.
