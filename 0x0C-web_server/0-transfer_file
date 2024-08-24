@@ -18,4 +18,4 @@ USERNAME="$3"
 PATH_TO_SSH_KEY="$4"
 
 # Transfer the file using scp to the user's home directory (~)
-scp -o StrictHostKeyChecking=no -i "$PATH_TO_SSH_KEY" "$PATH_TO_FILE" "$ubuntu@$184.72.96.209":~/
+scp -o "StrictHostKeyChecking=no" -i "$PATH_TO_SSH_KEY" "$PATH_TO_FILE" "$USERNAME@IP:~/"
