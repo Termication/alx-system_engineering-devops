@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 # Install nginx
-apt-get -y install nginx
-service nginx start
-ufw allow 'Nginx HTTP'
-echo "Holberton School\n" | sudo tee /var/www/html/index.nginx-debian.html
-service nginx restart
+
+sudo apt-get update
+sudo apt-get install nginx
+sudo ufw 'Nginx HTTP'
+
+echo "Hello World" | sudo tee /var/www/html/index.html
+
+#testing
+sudo nginx -t
+
+sudo service nginx reload
