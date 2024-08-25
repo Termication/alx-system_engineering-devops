@@ -1,19 +1,35 @@
 #!/usr/bin/env bash
-# installs and setup haproxy
+# Installs and sets up HAProxy
 
+# Update package list
 sudo apt-get -y update
-sudo apt-get -y install haproxy
-sudo chown $USER:USER /etc/haproxy/haproxy.cfg
 
-echo "
+# Install HAProxy
+sudo apt-get -y install haproxy
+
+# Append configuration to HAProxy configuration file
+sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null <<EOL
+
 frontend Innocent
-	bind *:80
-	mode http
-	default_backend app
+        bind *:80
+        mode http
+        default_backend app
 
 backend app
-	balance roundrobin
-	server 459074-web-01 184.72.96.209:80 check
-	server 459074-web-02 100.25.152.248:80 check" >> /etc/haproxy.cfg
+        balance roundrobin
+        server 459074-web-01 184.72.96.209:80 check
+        server 459074-web-02 100.25.152.248:80 check
+EOL
 
-sudo service haproxy restart
+# Check if HAProxy configuration is valid
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+if [ $? -ne 0 ]; then
+    echo "Error: HAProxy configuration is invalid."
+    exit 1
+fi
+
+# Restart HAProxy to apply the new configuration
+sudo systemctl restart haproxy
+
+# Confirm HAProxy is running
+sudo systemctl status haproxy
