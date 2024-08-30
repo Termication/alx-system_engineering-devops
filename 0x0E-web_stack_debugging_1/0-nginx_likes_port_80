@@ -4,4 +4,4 @@
 apt-get update -y
 apt-get install -y nginx
 sudo service nginx enable
-sudo service nginx restart
+sudo service nginx start
