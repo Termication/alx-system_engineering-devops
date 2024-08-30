@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# debugging ngix port 80
+# this script enables sites to sites-avalaible and ngix to listen to port 80
 
 apt-get update -y
 apt-get install -y nginx
-sudo service nginx enable
+sudo rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx start
