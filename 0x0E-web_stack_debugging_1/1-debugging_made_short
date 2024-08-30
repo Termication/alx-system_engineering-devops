@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-# make it short
+# This script sets up Nginx configuration by linking the default site configuration
+# and starts the Nginx service without checking its status.
 
-apt-get -y update
-apt-get install -y nginx
-sudo service start
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# Start the Nginx service
+sudo service nginx start
+
+# Remove the Nginx PID file if it exists to avoid startup issues
+rm /run/nginx.pid
